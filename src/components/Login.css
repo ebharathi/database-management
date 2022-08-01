@@ -1,0 +1,12 @@
+/* @import "//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css"; */
+@import url('https://fonts.googleapis.com/css2?family=Saira:wght@100&display=swap');
+
+.combinedInput{
+      display: flex;
+}
+.a{
+      flex: 1;
+}
+.b{
+      flex: 5;
+}

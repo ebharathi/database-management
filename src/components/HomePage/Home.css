@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+.navbar-brand{
+      font-family: 'Bebas Neue', cursive;
+}
+.dashboard:hover{
+      color:black;
+      background-color: #fff;
+}
+.small-screen{
+      display: none;
+}
+@media only screen and (max-width:578px)
+{
+      .small-screen{
+            display:block !important;
+      }
+      .big-screen{
+            display: none;
+      }
+      th{
+            font-size: 12px;
+      }
+    
+}
+td{
+      font-size: 12px;
+}
+
+@media only screen and (max-width:768px)
+{
+      td{
+            font-size: 10px;
+      }
+}
+.accordion-button.collapsed {
+      background: black;
+      color: #fff;
+    }
