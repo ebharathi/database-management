@@ -54,7 +54,7 @@ const Signup = () => {
      }
   return (
       <div className='signup'>
-      <div className="" style={{marginTop:159}}>
+      <div className="" style={{marginTop:160}}>
          <div className="row">
                <div className="col-sm-4"></div>
                <div className="col-sm-4">
