@@ -38,7 +38,7 @@ const Signup = () => {
            }
            if(name!=""&&email!=""&&password!="")
            {
-                  axios.post("https://database-management-serversie.herokuapp.com/add",{
+                  axios.post("https://database-management-serversie.herokuapp.com/user/add",{
                         name,
                         email,
                         password
@@ -54,7 +54,7 @@ const Signup = () => {
      }
   return (
       <div className='signup'>
-      <div className="" style={{marginTop:160}}>
+      <div className="" style={{marginTop:159}}>
          <div className="row">
                <div className="col-sm-4"></div>
                <div className="col-sm-4">
