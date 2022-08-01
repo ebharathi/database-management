@@ -106,10 +106,12 @@ const Home = () => {
                    .then(()=>{
                          setRefresh(Math.floor(Math.random()*(400-5+1)+5));
                          $('.success').show();
+                         Navigate(locationPath);
                          setTimeout(()=>{
                          $('.success').hide();
                          var frm = $('.addDatabase')[0];
                          frm.reset();
+                         
                          },6000)
                    }) 
                  }     

@@ -14,7 +14,7 @@ const Crud = ({db}) => {
       useEffect(()=>{
             axios.get("https://database-management-serversie.herokuapp.com/database")
                  .then((res)=>setData(res.data))
-      },[refresh])
+      },[refresh,db])
 
       const add=(e)=>{
             e.preventDefault();
