@@ -70,7 +70,7 @@ useEffect(()=>{
                     <div className="row">
                           <div className="col-sm-4"></div>
                           <div className="col-sm-4">
-                                <div className="box p-4" style={{backgroundColor:'#fff',borderRadius:8}}>
+                                <div className="box p-4 mx-2" style={{backgroundColor:'#fff',borderRadius:8}}>
                                       <div className="row">
                                             <div className="col-6 text-center">
                                                   <a href="/login" className="loginBtn details" style={{textDecoration:'none',color:'black',fontWeight:'bold'}}>LOGIN</a>
