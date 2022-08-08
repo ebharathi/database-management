@@ -118,7 +118,7 @@ useEffect(()=>{
                                             <br />
                                             <div className="text-center match" style={{fontSize:12,color:'red',display:'none'}}>Email and Password Doesn't Match!</div>
                                             <div className="text-center">
-                                                      <button className='btn btn-dark' onClick={submit}>SIGN UP</button>
+                                                      <button className='btn btn-dark' onClick={submit}>LOGIN</button>
                                             </div>
                                            </div>
                                       </form>
