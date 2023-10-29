@@ -3,7 +3,7 @@ import $ from 'jquery';
 
 const Model=({field=[],db,setRefresh})=>{
     const insertQuery=async(q)=>{
-        await axios.post('http://localhost:9000/table/add/row',{
+        await axios.post('https://database-manager-backend-nodejs.vercel.app/table/add/row',{
             query:q
         })
         .then((resp)=>{

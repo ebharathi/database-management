@@ -19,7 +19,7 @@ const Home = () => {
    const [userTables,setUserTables]=useState([])
    const [flag,setFlag]=useState(0);
    const getUserData=async()=>{
-         axios.get(`http://localhost:9000/user/details/${Userid}`)
+         axios.get(`https://database-manager-backend-nodejs.vercel.app/user/details/${Userid}`)
               .then((response)=>{
                   console.log("resp for user details-->",response)
                   if(response.data.error==false)
@@ -117,7 +117,7 @@ const Home = () => {
                   arr.map((s)=>{
                         cols.push(s.columnName)
                   })
-                  axios.post(`http://localhost:9000/table/create`,{
+                  axios.post(`https://database-manager-backend-nodejs.vercel.app/table/create`,{
                         creator:Userid,
                         tableName:dbname,
                         cols:cols
@@ -151,7 +151,7 @@ const Home = () => {
   //removing Database
   const removeDB=(e)=>{
       console.log(e.target.className);
-                        axios.get(`http://localhost:9000/api/user/${Userid}/table/remove/${e.target.className}`)
+                        axios.get(`https://database-manager-backend-nodejs.vercel.app/api/user/${Userid}/table/remove/${e.target.className}`)
                              .then((response)=>{
                               console.log("DELETE OPERATION RESPONSE--->",response)
                               if(response.data?.error==false)

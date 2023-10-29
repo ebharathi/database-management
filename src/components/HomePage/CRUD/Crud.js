@@ -17,7 +17,7 @@ const Crud = ({db}) => {
       async function getData()
       {
             // alert("--->",db);
-            await axios.get(`http://localhost:9000/table/get/${db}`)
+            await axios.get(`https://database-manager-backend-nodejs.vercel.app/table/get/${db}`)
             .then((res)=>{
                    console.log("res from table data in crud.js-->",res);
                    if(res.data?.error==false)
@@ -51,7 +51,7 @@ const Crud = ({db}) => {
             {
                   let q=`DELETE FROM ${db} WHERE ${col}='${key}' `
                   console.log("Delete query--->",q);
-            axios.post(`http://localhost:9000/table/remove/row`,{
+            axios.post(`https://database-manager-backend-nodejs.vercel.app/table/remove/row`,{
                   query:q
             })
             .then(response=>{

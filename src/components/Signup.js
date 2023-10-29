@@ -38,7 +38,7 @@ const Signup = () => {
            }
            if(name!=""&&email!=""&&password!="")
            {
-                  axios.post("http://localhost:9000/signup",{
+                  axios.post("https://database-manager-backend-nodejs.vercel.app/signup",{
                         name:name,
                         email:email,
                         password:password
@@ -46,10 +46,12 @@ const Signup = () => {
                   .then(response=>{
                         console.log("signup response came")
                         console.log(response.data);
-                        // $('.success-msg').show();
-                        // setTimeout(() => {
-                        //       Navigate('/login');
-                        // }, 5000);
+                        //   Navigate('/login');
+                    if(response.data?.error==false)
+                        $('.success-msg').show();
+                        setTimeout(() => {
+                              Navigate('/login');
+                        }, 1000);
                   })
            }
      }
