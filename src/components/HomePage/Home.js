@@ -16,10 +16,24 @@ const Home = () => {
    const [db,setDB]=useState("");
    const [refresh,setRefresh]=useState(0);
    const [data,setData]=useState([]);
+   const [userTables,setUserTables]=useState([])
    const [flag,setFlag]=useState(0);
+   const getUserData=async()=>{
+         axios.get(`http://localhost:9000/user/details/${Userid}`)
+              .then((response)=>{
+                  console.log("resp for user details-->",response)
+                  if(response.data.error==false)
+                  {
+                        if(response?.data?.data?.created_tables)
+                        {
+                              console.log("--->",response.data.data.created_tables)
+                              setUserTables(response.data.data.created_tables)
+                        }
+                  }
+              });
+   }
    useEffect(()=>{
-         axios.get("https://database-management-serversie.herokuapp.com/database")
-              .then((response)=>setData(response.data));
+      getUserData()
    },[refresh])
    const [col,setCOL]=useState([])
   //addcolumn
@@ -120,7 +134,7 @@ const Home = () => {
                                var frm = $('.addDatabase')[0];
                                frm.reset();
                                
-                               },3000)
+                               },500)
                         }
                         else{
                               $('.db-err').show();
@@ -137,18 +151,13 @@ const Home = () => {
   //removing Database
   const removeDB=(e)=>{
       console.log(e.target.className);
-      data.map(d=>{
-            if(d.creator==Userid)
-            {
-                  if(d.dbname==e.target.className)
-                  {
-                        axios.delete(`https://database-management-serversie.herokuapp.com/database/delete/${d._id}`)
-                             .then(()=>{
-                              setRefresh(Math.floor(Math.random()*(400-5+1)+5));
+                        axios.get(`http://localhost:9000/api/user/${Userid}/table/remove/${e.target.className}`)
+                             .then((response)=>{
+                              console.log("DELETE OPERATION RESPONSE--->",response)
+                              if(response.data?.error==false)
+                                setRefresh(Math.floor(Math.random()*(400-5+1)+5));
+                                getUserData();
                              });
-                  }
-            }
-      })
   }
 
   const load=(db)=>{
@@ -218,7 +227,7 @@ const Home = () => {
                         <h6 style={{color:'#fff',fontSize:13,cursor:'pointer'}}>CREATED DATABASES</h6>
                         <hr />
                         {
-                              data.map(d=>d.creator==Userid?<><a onClick={()=>load(d.dbname)} className='details big' style={{cursor:'pointer',textDecoration:'none',fontWeight:'lighter',color:'#fff'}}>{d.dbname}<span style={{fontSize:10,float:'right'}} className={d.dbname} onClick={removeDB}> X</span></a><hr/></>:'')
+                              userTables.map(d=><><a onClick={()=>load(d)} className='details small' style={{cursor:'pointer',color:'white',textDecoration:'none',fontWeight:'lighter'}}>{d}<span style={{fontSize:13,float:'right'}} className={d} onClick={removeDB}> X</span></a><hr/></>)
                         }
                       </span>
                        <div className="accordion my-1 small-screen" id="accordionExample">
@@ -231,7 +240,7 @@ const Home = () => {
                               <div id="collapseOne" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                     <div className="accordion-body">
                                     {
-                                          data.map(d=>d.creator==Userid?<><a onClick={()=>load(d.dbname)} className='details small' style={{cursor:'pointer',color:'black',textDecoration:'none',fontWeight:'lighter'}}>{d.dbname}<span style={{fontSize:10,float:'right'}} className={d.dbname} onClick={removeDB}> X</span></a><hr/></>:'')
+                                          userTables.map(d=><><a onClick={()=>load(d)} className='details small' style={{cursor:'pointer',color:'black',textDecoration:'none',fontWeight:'lighter'}}>{d}<span style={{fontSize:13,float:'right'}} className={d} onClick={removeDB}> X</span></a><hr/></>)
                                     }
                                      </div>
                               </div>
