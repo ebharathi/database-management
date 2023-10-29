@@ -10,10 +10,25 @@ const Crud = ({db}) => {
       // console.log(locationPath);
       const Userid=locationPath.substring(locationPath.lastIndexOf('user/')+5);
       const [data,setData]=useState([]);
+      const [field,setFields]=useState([])
+      const [items,setItems]=useState([]);
       const [refresh,setRefresh]=useState(0);
+      async function getData()
+      {
+            // alert("--->",db);
+            await axios.get(`http://localhost:9000/table/get/${db}`)
+            .then((res)=>{
+                   console.log("res from table data in crud.js-->",res);
+                   if(res.data?.error==false)
+                   {
+                        setItems(res?.data?.data?.rows);
+                        if(res?.data?.data?.fields)
+                         setFields(res?.data?.data?.fields)
+                   }
+            })
+      }
       useEffect(()=>{
-            axios.get("https://database-management-serversie.herokuapp.com/database")
-                 .then((res)=>setData(res.data))
+            getData();
       },[refresh,db])
 
       const add=(e)=>{
@@ -127,7 +142,7 @@ const Crud = ({db}) => {
       }
   return (
     <div className='crud'>
-          <div className="row m-1">
+          {/* <div className="row m-1">
                {
                      data.map(d=>d.creator==Userid?d.dbname==db?d.dbcolumn.map(dbc=>
                         <div className="col-3 my-1" style={{border:'1px solid black'}}>
@@ -143,6 +158,24 @@ const Crud = ({db}) => {
                         </div>
                         ):'':'')
                }
+          </div> */}
+          <div className='row m-1'>
+  {
+             field.map((s,index)=>
+             <div className="col-3 my-1" style={{border:'1px solid black'}}>
+                              <table className='text-center' style={{width:'100%'}}>
+                                    <tr className='text-center' style={{}}>
+                                          <th className=''>{s.name}</th>
+                                    </tr>
+                                    <hr />
+                                    {
+                                          // dbc.value.map(val=><tr style={{}}><td>{val}</td><hr /></tr>)
+                                          items.map((x,index)=>x[s.name]&&<tr><td>{x[s.name]}</td><hr/></tr>)
+                                    }
+                              </table>
+               </div>   
+             )
+  }
           </div>
           <div className="my-2" style={{float:''}}>
                 <button className='btn btn-primary' style={{width:'100px'}} data-bs-toggle="modal" data-bs-target="#example2">ADD</button>

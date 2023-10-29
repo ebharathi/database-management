@@ -159,8 +159,8 @@ const Home = () => {
                                 getUserData();
                              });
   }
-
-  const load=(db)=>{
+  const [items,setItems]=useState({});
+  const load=async(db)=>{
          setDB(db);
          setFlag(1);
   }
