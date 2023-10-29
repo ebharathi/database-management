@@ -11,11 +11,11 @@ const Login = () => {
      const [password,setPassword]=useState("");
  
       const [data,setData]=useState([]);
-useEffect(()=>{
-    axios.get("https://database-management-serversie.herokuapp.com/user")
-         .then((response)=>setData(response.data));
-},[])
-  const submit=(e)=>{
+// useEffect(()=>{
+//     axios.get("https://database-management-serversie.herokuapp.com/user")
+//          .then((response)=>setData(response.data));
+// },[])
+  const submit=async(e)=>{
         e.preventDefault();
         if(email=="")
         {
@@ -33,34 +33,23 @@ useEffect(()=>{
         }
         if(email!=""&&password!="")
         {
-              data.map(d=>{
-                    if(d.email==email)
-                    {
-                         if(d.password==password)
-                         {
-                               Navigate(`/user/${d._id}`);
-                         }
-                         else{
-                               $('.match').show();
+              await axios.post('http://localhost:9000/login',{
+                  email:email,
+                  password:password
+              })
+              .then((resp)=>{
+                  console.log("LOGIN RESPONSE--->",resp)
+                  if(resp.data.error==false)
+                  {
+                         Navigate(`/user/${resp.data.userId}`)
+                  }
+                  else
+                  {
+                             $('.match').show();
                                setTimeout(() => {
                                       $('.match').hide();
-                               }, 3000);
-                         }
-                    }
-                    if(d.password==password)
-                    {
-                         if(d.email==email)
-                         {
-                               Navigate(`/user/${d._id}`);
-                         }
-                         else{
-                               $('.match').show();
-                               setTimeout(() => {
-                                      $('.match').hide();
-                               }, 3000);
-                         }
-                    }
-                    
+                               }, 3000);     
+                  }
               })
         }
   }
@@ -116,7 +105,7 @@ useEffect(()=>{
                                                       </div>
                                             </div>
                                             <br />
-                                            <div className="text-center match" style={{fontSize:12,color:'red',display:'none'}}>Email and Password Doesn't Match!</div>
+                                            <div className="text-center match" style={{fontSize:12,color:'red',display:'none'}}>Invalid User!</div>
                                             <div className="text-center">
                                                       <button className='btn btn-dark' onClick={submit}>LOGIN</button>
                                             </div>

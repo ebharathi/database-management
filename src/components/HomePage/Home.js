@@ -98,21 +98,36 @@ const Home = () => {
                 //   console.log(arr);
                  if(proceed==0)
                  {
-                  axios.post(`https://database-management-serversie.herokuapp.com/database/add`,{
+                  console.log("--->",dbname,"-->",arr)
+                  let cols=[]
+                  arr.map((s)=>{
+                        cols.push(s.columnName)
+                  })
+                  axios.post(`http://localhost:9000/table/create`,{
                         creator:Userid,
-                        dbname:dbname,
-                        dbcolumn:arr 
+                        tableName:dbname,
+                        cols:cols
                    })
-                   .then(()=>{
-                         setRefresh(Math.floor(Math.random()*(400-5+1)+5));
-                         $('.success').show();
-                         Navigate(locationPath);
-                         setTimeout(()=>{
-                         $('.success').hide();
-                         var frm = $('.addDatabase')[0];
-                         frm.reset();
-                         
-                         },6000)
+                   .then((resp)=>{
+                        console.log("CREATE TABLE RESPONSE FROM BACKEND--->",resp)
+                        if(resp.data.error==false)
+                        {
+                               setRefresh(Math.floor(Math.random()*(400-5+1)+5));
+                               $('.success').show();
+                               Navigate(locationPath);
+                               setTimeout(()=>{
+                               $('.success').hide();
+                               var frm = $('.addDatabase')[0];
+                               frm.reset();
+                               
+                               },3000)
+                        }
+                        else{
+                              $('.db-err').show();
+                              setTimeout(() => {
+                              $('.db-err').hide();
+                              }, 4000);  
+                        }
                    }) 
                  }     
              }
@@ -184,6 +199,7 @@ const Home = () => {
                                                                      <div className="dbnameerror text-center" style={{fontSize:12,color:'red',display:'none'}}>Database Name Already Exists!</div>
                                                                      <div className="fielderror text-center" style={{fontSize:12,color:'red',display:'none'}}>Please Enter all the Required Fields!</div>
                                                                      <div className="charerror text-center" style={{fontSize:12,color:'red',display:'none'}}>Max.10 Characters Only Allowed!</div>
+                                                                     <div className="db-err text-center" style={{fontSize:12,color:'red',display:'none'}}>Database name already Exists!!</div>
                                                                      <div className="success text-center" style={{fontSize:12,color:'green',display:'none'}}>Successfully Created </div>
                                                               </form>
                                                             </div>

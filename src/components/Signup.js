@@ -38,17 +38,18 @@ const Signup = () => {
            }
            if(name!=""&&email!=""&&password!="")
            {
-                  axios.post("https://database-management-serversie.herokuapp.com/user/add",{
-                        name,
-                        email,
-                        password
+                  axios.post("http://localhost:9000/signup",{
+                        name:name,
+                        email:email,
+                        password:password
                   })
                   .then(response=>{
+                        console.log("signup response came")
                         console.log(response.data);
-                        $('.success-msg').show();
-                        setTimeout(() => {
-                              Navigate('/login');
-                        }, 5000);
+                        // $('.success-msg').show();
+                        // setTimeout(() => {
+                        //       Navigate('/login');
+                        // }, 5000);
                   })
            }
      }
