@@ -1,0 +1,14 @@
+.container-scroll {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .container-scroll .row {
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+  .row table{
+    flex: 1;
+  }
+  

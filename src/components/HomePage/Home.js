@@ -179,7 +179,7 @@ const Home = () => {
           <br />
           <div className="container" style={{border:'1px solid white',backgroundColor:'#fff',borderRadius:4}}>
                        <button className='btn btn-dark dashboard'>DASHBOARD</button>
-                       <button className='btn ' style={{float:'right',backgroundColor:'#123475',color:'#fff'}} data-bs-toggle="modal" data-bs-target="#example" onClick={()=>setCOL([])}>new</button>
+                       <button className='btn ' style={{float:'right',backgroundColor:'#123475',color:'#fff'}} data-bs-toggle="modal" data-bs-target="#example" onClick={()=>setCOL([])}>Add Table</button>
                        <hr style={{color:'black'}} />
                        {/* <br /> */}
           
@@ -187,7 +187,7 @@ const Home = () => {
                                                       <div className="modal-dialog">
                                                       <div className="modal-content">
                                                             <div className="modal-header">
-                                                            <h5 className="modal-title" id="exampleModalLabel">NEW DATABASE</h5>
+                                                            <h5 className="modal-title" id="exampleModalLabel">NEW TABLE</h5>
                                                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div className="modal-body">
@@ -224,7 +224,7 @@ const Home = () => {
                  <div className="col-sm-2 text-center" style={{borderRight:'',backgroundColor:'black'}}>
                       <span className='big-screen'>
                       <br />
-                        <h6 style={{color:'#fff',fontSize:13,cursor:'pointer'}}>CREATED DATABASES</h6>
+                        <h6 style={{color:'#fff',fontSize:17,fontWeight:300,cursor:'pointer'}}>MY TABLES</h6>
                         <hr />
                         {
                               userTables.map(d=><><a onClick={()=>load(d)} className='details small' style={{cursor:'pointer',color:'white',textDecoration:'none',fontWeight:'lighter'}}>{d}<span style={{fontSize:13,float:'right'}} className={d} onClick={removeDB}> X</span></a><hr/></>)
